@@ -98,3 +98,5 @@ Well done is better than well said. — Benjamin Franklin
 Your mind will answer most questions if you learn to relax and wait for the answer. — William S. Burroughs
 We cannot change anything until we accept it. Condemnation does not liberate, it oppresses. — Carl Jung
 The word 'happy' would lose its meaning if it were not balanced by sadness. — Carl Jung
+Ok, I'm just uploading the new version of the kernel, v1.3.33, also known as "the buggiest kernel ever".\
+    -- Linus Torvalds

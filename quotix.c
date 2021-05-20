@@ -3,6 +3,7 @@
 #include <time.h>
 #include <errno.h>
 #include <string.h>
+#include <stdbool.h>
 #include "quotix.h"
 
 void check_file(const char* filename)
@@ -41,6 +42,11 @@ int count_lines(const char* filename)
       check_line(line_count, char_count);
       char_count = 0;
    }
+   else if (c == '\\')
+   {
+     if (fgetc(fptr) != '\n')
+       char_count++;
+   }
    else
    {
      char_count++;
@@ -74,15 +80,23 @@ void print_random_quote(const char* filename, int lines_quantity)
   line_number = rand() % lines_quantity;
   while (fgets(buffer, sizeof(buffer), fptr) != NULL)
   {
+    size_t slen = strlen(buffer);
     if (count == line_number)
     {
+      if (buffer[slen - 2] == '\\') {
+        buffer[slen - 2] = '\n';
+        buffer[slen - 1] = '\0';
+        fprintf(stdout, "%s", buffer);
+        continue;
+      }
       fprintf(stdout, "%s", buffer);
       fclose(fptr);
       exit(0);
     }
     else
     {
-      count++;
+      if (buffer[slen - 2] != '\\')
+        count++;
     }
   }
 
